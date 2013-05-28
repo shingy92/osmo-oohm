@@ -1,0 +1,51 @@
+/*table formatting*/
+
+   .border-bottom {
+        border-bottom: solid 1px black;
+        border-top: solid 1px black;
+    }
+
+    table.table thead .sorting,
+    table.table thead .sorting_asc,
+    table.table thead .sorting_desc,
+    table.table thead .sorting_asc_disabled,
+    table.table thead .sorting_desc_disabled {
+        cursor: pointer;
+        *cursor: hand;
+    }
+ 
+    table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
+    table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
+    table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
+    table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
+    table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }
+
+/*Sidebar fix*/
+   .bs-docs-sidenav {
+        width: 200px;
+   }
+
+/*FOKUS Color Scheme*/
+    h1 {
+       color: #009473
+    }
+
+    h2 {
+       color: #009473
+    }
+    
+    a {
+        color: #00509D;
+    }
+
+    .nav-list a {
+        color: #009473;
+    }
+
+    .nav-list .active a {
+        background-color: #009473;
+    }
+
+    .nav-list .active a:hover {
+        background-color: #009473;
+    }

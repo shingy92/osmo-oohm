@@ -1,0 +1,26 @@
+0.4
+---
+
+-  Changed project name to osmo-oohmi for incorporation into official osmocom repository
+-  Added Visual hint for indicating if BTS is Active or not
+-  Cleaned up redundant code
+-  Added more customization details to README
+
+0.3
+---
+
+-  Cleaned up folder structure
+-  Added IMEI & IMSI naming functionality
+-  Added functionality to BTS channel configuration settings
+-  Optimized Subscriber table view
+-  Added IP address to BTS detail view
+
+0.2
+---
+
+-  Migrated from sigle python file to scaffolding architecture
+
+0.1
+---
+
+-  Initial version
