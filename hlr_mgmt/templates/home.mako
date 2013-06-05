@@ -18,5 +18,5 @@ You can:<br>
 Copyright &copy; 2013<br/>
 Fraunhofer Institute for Open Communication Systems (FOKUS)<br/>
 Competence Center NETwork research (NET), St. Augustin, GERMANY<br/>
-Interface by <a href="mailto:alton.kenneth.macdoald@fokus.fraunhofer.de">Alton MacDonald</a><br/>
+Interface by <a href="mailto:alton.kenneth.macdonald@fokus.fraunhofer.de">Alton MacDonald</a><br/>
 
