@@ -49,9 +49,11 @@ Installation & Configuration:
 2) Install the python dependencies
 
 	sudo python setup.py install
+	cp production.ini /etc/openbsc/production.ini
 
 3) Run the Server:
 
+	cd /etc/openbsc/
 	pserve production.ini start
 
 	OPTIONAL:
@@ -59,6 +61,11 @@ Installation & Configuration:
 
 		pserver --help
 
-4) Access the Web Interface
+4) Install init script
+
+	sudo cp osmo-oohmi /etc/init.d/osmo-oohmi
+	sudo update-rc.d osmo-oohmi defaults
+
+5) Access the Web Interface
 
 	http://localhost:8080/
