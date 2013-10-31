@@ -51,7 +51,13 @@ Installation & Configuration:
 	sudo python setup.py install
 	cp production.ini /etc/openbsc/production.ini
 
-3) Run the Server:
+3) Verify installation:
+
+	python setup.py nosetests
+
+	If the above command generates errors, try to fix these before running the software
+
+4) Run the Server:
 
 	cd /etc/openbsc/
 	pserve production.ini start
@@ -61,11 +67,11 @@ Installation & Configuration:
 
 		pserver --help
 
-4) Install init script
+5) Install init script
 
-	sudo cp osmo-oohmi /etc/init.d/osmo-oohmi
-	sudo update-rc.d osmo-oohmi defaults
+	sudo cp osmocom-oohmi /etc/init.d/osmocom-oohmi
+	sudo update-rc.d osmocom-oohmi defaults
 
-5) Access the Web Interface
+6) Access the Web Interface
 
 	http://localhost:8080/

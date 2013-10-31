@@ -21,6 +21,7 @@
 ###
 
 import os
+import multiprocessing
 
 from setuptools import setup, find_packages
 
@@ -33,6 +34,8 @@ requires = [
     'pyramid_debugtoolbar',
     'pyramid_exclog',
     'waitress',
+    'nose',
+    'coverage'
     ]
 
 setup(name='osmo_oohmi',
@@ -54,7 +57,7 @@ setup(name='osmo_oohmi',
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="osmo_oohmi",
+      test_suite="nose.collector",
       entry_points="""\
       [paste.app_factory]
       main = hlr_mgmt:main

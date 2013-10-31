@@ -205,7 +205,6 @@ def bsc_view(request):
     if bsc.connected:
 	bsc_version = bsc.get_version()
 	bsc_network = bsc.get_network_info()
-        print bsc_network
 	bsc_statistics = bsc.get_network_statistics()
 	bsc.close()
     return {'bsc_version': bsc_version, 'bsc_network': bsc_network, 'bsc_statistics': bsc_statistics}

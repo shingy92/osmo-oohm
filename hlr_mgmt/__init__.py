@@ -69,10 +69,7 @@ def new_request_subscriber(event):
     request.db = sqlite3.connect(settings['db'])
     request.add_finished_callback(close_db_connection)
 
-def main(global_config, **settings):
-    """ This function returns a Pyramid WSGI application.
-    """
-
+def load_settings():
     # configuration settings
     settings = {}
     settings['reload_all'] = True
@@ -87,7 +84,7 @@ def main(global_config, **settings):
     settings['sgsn_ip'] = "127.0.0.1"
     settings['bsc_port'] = 4242
     settings['sgsn_port'] = 4245
-
+    
     # loads MCC MNC codes to memory
     mcc_mnc = os.path.join(here,'mcc_mnc.csv')
     settings['mcc_mnc'] = parse_mcc_csv(mcc_mnc)
@@ -98,6 +95,13 @@ def main(global_config, **settings):
     subMonitor.setDaemon(True)
     subMonitor.start()
     settings['subMonitor'] = subMonitor
+    
+    return settings
+
+def main(global_config, **settings):
+    """ This function returns a Pyramid WSGI application.
+    """
+    settings = load_settings
     
     # session factory
     session_factory = UnencryptedCookieSessionFactoryConfig('0p3nb5c.5ign4tur3')
