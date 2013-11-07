@@ -91,7 +91,7 @@ def load_settings():
     # mcc_mnc was obtained manually from http://mobile-network-codes.com/mobile-network-codes-country-codes.asp
 
     # initiates SubscriberMonitor
-    subMonitor = SubscriberMonitor(settings['provider'], settings['db'], port=settings['bsc_port'])
+    subMonitor = SubscriberMonitor(settings['provider'], settings['db'], ip=settings['bsc_ip'] port=settings['bsc_port'])
     subMonitor.setDaemon(True)
     subMonitor.start()
     settings['subMonitor'] = subMonitor
@@ -101,7 +101,7 @@ def load_settings():
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-    settings = load_settings
+    settings = load_settings()
     
     # session factory
     session_factory = UnencryptedCookieSessionFactoryConfig('0p3nb5c.5ign4tur3')
