@@ -28,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-     <tr><td>LCR</td>
+     <tr><td>LCR <div class="pull-right">(Local GSM Call Routing)</div></td>
     % if service_status['lcr']:
       % if service_status['lcr'].find("running")>0:
         <td><span class="label label-success">Running</span></td>
@@ -43,7 +43,7 @@
       <reload><a href="${request.route_url('manage_service', service='lcr', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='lcr', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td>Asterisk</td>
+    <tr><td>Asterisk <div class="pull-right">(External Call Routing)</div></td>
     % if service_status['asterisk']:
       % if service_status['asterisk'].find("failed")<0:
         <td><span class="label label-success">Running</span></td>
@@ -58,7 +58,7 @@
       <reload><a href="${request.route_url('manage_service', service='asterisk', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='asterisk', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td>GGSN</td>
+    <tr><td>GGSN <div class="pull-right">(Data Gateway)</div></td>
     % if service_status['ggsn']:
       % if service_status['ggsn'].find("failed")<0:
         <td><span class="label label-success">Running</span></td>
@@ -73,7 +73,7 @@
       <reload><a href="${request.route_url('manage_service', service='ggsn', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='ggsn', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td>OpenBSC</td>
+    <tr><td>OpenBSC <div class="pull-right">(Controls GSM Access)</div></td>
     % if service_status['nitb']:
       % if service_status['nitb'].find("failed")<0:
         <td><span class="label label-success">Running</span></td>
@@ -88,7 +88,7 @@
       <reload><a href="${request.route_url('manage_service', service='nitb', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='nitb', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td>OsmoSGSN</td>
+    <tr><td>OsmoSGSN <div class="pull-right">(GPRS Data Interface)</div></td>
     % if service_status['sgsn']:
       % if service_status['sgsn'].find("failed")<0:
         <td><span class="label label-success">Running</span></td>
@@ -103,15 +103,11 @@
       <reload><a href="${request.route_url('manage_service', service='sgsn', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='sgsn', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td><strong><em>SubscriberMonitor</em></strong></td>
+    <tr><td><strong><em>SubscriberMonitor</em></strong> <div class="pull-right">(Greets users with SMS)</div></td>
     % if service_status['subMonitor']:
-      % if service_status['subMonitor']==True:
-        <td><span class="label label-success">Running</span></td>
-      % else:
-        <td><span class="label label-important">Stopped</span></td>
-      % endif
+      <td><span class="label label-success">Running</span></td>
     % else:
-      <td><span class="label label-warning">ERROR</span></td>
+      <td><span class="label label-important">Stopped</span></td>
     % endif
     <td>
       <start><a href="${request.route_url('manage_service', service='subMonitor', action=1)}"><span class="badge badge-success"><i class="icon-play icon-white"></i></span></a></start>

@@ -12,10 +12,14 @@
 % if bts and phys_cfg:
   <ul class="nav nav-tabs">
   % for i in range(0,len(bts)):
-       % if bts[i].has_key('ip'):
-          <li><a href="#bts_${i}" data-toggle="tab"><h5><span class="badge badge-success"><i class="icon-map-marker icon-white"></span></i> BTS ${i}</h5></a></li>
+       % if bts[i]['oml_state']:
+          % if bts[i].has_key('ip'):
+             <li><a href="#bts_${i}" data-toggle="tab"><h5><span class="badge badge-success"><i class="icon-map-marker icon-white"></span></i> BTS ${i}</h5></a></li>
+          % else:          
+             <li><a href="#bts_${i}" data-toggle="tab"><h5><span class="badge badge-warning"><i class="icon-warning-sign icon-white"></span></i> BTS ${i}</h5></a></li>
+          % endif
        % else:
-          <li><a href="#bts_${i}" data-toggle="tab"><h5><span class="badge badge-warning"><i class="icon-warning-sign icon-white"></span></i> BTS ${i}</h5></a></li>
+             <li><a href="#bts_${i}" data-toggle="tab"><h5><span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></span></i> BTS ${i}</h5></a></li>
        % endif
   % endfor
   </ul>
@@ -27,10 +31,14 @@
         <div class="tab-pane" id="bts_${i}">
       % endif
           <h3>BTS ${i}
-          % if bts[i].has_key('ip'):
-            (${bts[i]['ip']})
+          % if bts[i]['oml_state']:
+            % if bts[i].has_key('ip'):
+              (${bts[i]['ip']})
+            % else:
+              (OML connected without IP address)
+            % endif
           % else:
-            (not connected)
+            (OML disconnected)
           % endif
           <br/>${bts[i]['description']}
           </h3>

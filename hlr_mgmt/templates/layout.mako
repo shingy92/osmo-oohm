@@ -36,7 +36,7 @@
   <div class="fluid-container">
     <div class="fluid-row">
       <div class="span2 affix" style="height:100%;">
-            <a href="http://www.fokus.fraunhofer.de/de/rescon/index.html">
+            <a href="http://www.fokus.fraunhofer.de/en/net/index.html">
             <img src="/static/images/FOKUS.png">
             </a>
             <ul class="nav nav-list bs-docs-sidenav">

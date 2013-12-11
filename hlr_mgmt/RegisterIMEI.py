@@ -116,7 +116,7 @@ class RegisterIMEI(threading.Thread):
 
 	def run(self):
 		log.debug("starting RegisterIMEI deamon")
-		self.sqlconn = sqlite3.connect(self.HLR_DB)
+		self.sqlconn = sqlite3.connect(self.HLR_DB,60)
 		self.cursor = self.sqlconn.cursor()
 		return self.authorize_imei(self.imei)
 

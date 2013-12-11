@@ -52,11 +52,14 @@ def connect_sgsn(settings):
 	return sgsn
 
 def db_execute(db, sql_string, params=None):
-	if params==None:
-		rs = db.execute(sql_string)
-	else:
-		rs = db.execute(sql_string, params)
-	db.commit()
+	try:
+		if params==None:
+			rs = db.execute(sql_string)
+		else:
+			rs = db.execute(sql_string, params)
+		db.commit()
+	except sqlite3.OperationalError:
+		rs = []
 	return rs
 	
 def db_query(db, sql_string, params=None):
@@ -240,6 +243,7 @@ def bts_view(request):
             bts[i]['timeslots'] = collections.defaultdict()
             bts[i]['stats'] = bsc.get_bts_info(str(i))
             bts[i]['description'] = bts[i]['stats'][1].split(": ")[1].strip()
+            bts[i]['oml_state'] = (bts[i]['stats'][15].split(": ")[1] == "connected.")
             for j in range(0,8):
                 helper = bsc.get_timeslot_info(str(i), str(j))
                 bts[i]['timeslots'][j] = helper[0].replace("cfg","cfg:") + "," + helper[1]

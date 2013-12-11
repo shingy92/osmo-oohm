@@ -39,25 +39,39 @@ class SubscriberMonitor(threading.Thread):
 		self.bsc_conn = telnet_backend(ip, port)
 		self.active_subscribers	= collections.defaultdict()
 		self.active = True
-	
+		
+	def is_running(self):
+		return self.active
+		
+	def connect_to_db(self):
 		self.sqlconn = sqlite3.connect(self.HLR_DB, check_same_thread = False)
 		self.cursor = self.sqlconn.cursor()
 
-	def run(self):
-                self.get_active_subs()
-                while(self.active):
-                        self.check_new_subs()
-                        self.get_active_subs()
-                        time.sleep(60)
-        def stop(self):
-                self.active = False
+	def disconnect_from_db(self):
+		try:
+			self.sqlconn.close()
+		except:
+			pass
 
-        def restart(self):
-                self.active_subscribers	= collections.defaultdict()
-                self.active = True
-        
-        def is_running(self):
-                return self.active
+	def run(self):
+		self.connect_to_db()
+		self.get_active_subs()
+		while(self.active):
+			try:
+				self.check_new_subs()
+				self.get_active_subs()
+			except sqlite3.OperationalError:
+				pass	
+			time.sleep(60)
+	def stop(self):
+		self.active = False
+		self.disconnect_from_db()
+
+	def restart(self):
+		self.active_subscribers	= collections.defaultdict()
+		self.active = True
+		self.disconnect_from_db()
+		self.connect_to_db()
 
 	def get_active_subs(self):
 		# query active subscribers
