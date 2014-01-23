@@ -394,6 +394,14 @@ def rename_component_view(request):
             update_imei_name(request.db, reference, value)
         if(field=="imsi"):
             update_imsi_name(request.db, reference, value)
+    elif(field=="bts"):
+        settings = request.registry.settings
+        bsc = connect_bsc(settings)
+        if bsc.connected==True:
+            bsc.set_bts_description(reference, value)
+            bsc.close()
+        else:
+            return {'success':1}
     else:
        return {'success':0}
     return {'success':1}

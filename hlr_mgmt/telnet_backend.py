@@ -114,6 +114,13 @@ class telnet_backend(object):
 
 	def get_timeslot_info(self, bts, timeslot):
 		return self.execute("show timeslot " + bts + " 0 " + timeslot)
+		
+	def set_bts_description(self, bts, description):
+		self.execute('configure terminal')
+		self.execute('network')
+		self.execute('bts ' + bts)
+		self.execute('description ' + description)
+		return self.save_config()
 
 	## OpenSGSN Commands ##	
 	

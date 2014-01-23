@@ -40,7 +40,7 @@
           % else:
             (OML disconnected)
           % endif
-          <br/>${bts[i]['description']}
+          <br/><bts_description data-pk="${i}">${bts[i]['description']}</bts_description>
           </h3>
         ${table_iterator.iterate(bts[i]['stats'])}
         <h3>Channel Details</h3>
@@ -137,4 +137,24 @@ $('select').tooltip({
         placement: "left",
         title: "Select desired channel configuration"
 });
+
+$('bts_description').tooltip({
+        placement: "right",
+        title: "Click to Edit this Description"
+});
+
+$('bts_description').editable({
+        type: 'text',
+        placement: 'bottom',
+        title: 'Edit the Description of this BTS',
+        emptytext: '____',
+        inputclass: 'span3',
+        url: function(params)
+        {
+                $.ajax({
+                        url: '${request.route_url('rename_component',field='bts',value='val',reference='ref')}'.replace('ref/val', params.pk+'/'+params.value)
+                });
+         }
+});
+
 </script>

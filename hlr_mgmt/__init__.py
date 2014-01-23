@@ -108,6 +108,7 @@ def main(global_config, **settings):
     
     # configuration setup
     config = Configurator(settings=settings, session_factory=session_factory)
+    config.include('pyramid_mako')
     config.include('pyramid_debugtoolbar')
     config.include('pyramid_exclog')
 

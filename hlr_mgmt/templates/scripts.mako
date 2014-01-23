@@ -58,7 +58,7 @@
       <reload><a href="${request.route_url('manage_service', service='asterisk', action=2)}"><span class="badge badge-info"><i class="icon-repeat icon-white"></i></span></a></reload>
       <stop><a href="${request.route_url('manage_service', service='asterisk', action=3)}"><span class="badge badge-important"><i class="icon-pause icon-white"></i></span></a></stop>
     </td></tr>
-    <tr><td>GGSN <div class="pull-right">(Data Gateway)</div></td>
+    <tr><td>GGSN <div class="pull-right">(GPRS Data Gateway)</div></td>
     % if service_status['ggsn']:
       % if service_status['ggsn'].find("failed")<0:
         <td><span class="label label-success">Running</span></td>
