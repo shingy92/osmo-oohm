@@ -65,12 +65,12 @@ class SubscriberMonitor(threading.Thread):
 			time.sleep(60)
 	def stop(self):
 		self.active = False
+		self.active_subscribers	= collections.defaultdict()
 		self.disconnect_from_db()
 
 	def restart(self):
-		self.active_subscribers	= collections.defaultdict()
+		self.stop()
 		self.active = True
-		self.disconnect_from_db()
 		self.connect_to_db()
 
 	def get_active_subs(self):
@@ -85,8 +85,7 @@ class SubscriberMonitor(threading.Thread):
 	def check_new_subs(self):
 		# authorized=1 checks for authorized subscribers
 		# updated>datetime(...) checks for updates in the last minute
-		# lac checks that the phone is active
-		# TODO: currently ASSUMED that one LAC is used, if two are used this condition might not always work, check later...
+		# lac value greater than 0 indicate the phone is active
 		#sqlIndex = [0 , 1      , 2      , 3   , 4   , 5        , 6         , 7   , 8  , 9        ]
 		#sqlValue = (id, created, updated, imsi, name, extension, authorized, tmsi, lac, expire_lu)
 
@@ -109,7 +108,7 @@ class SubscriberMonitor(threading.Thread):
 					diff = updated-expected
 					if diff > timedelta(hours=1):
 						# returning subscriber (roaming/out-of-range/?)
-						self.bsc_conn.send_welcome_sms(subscriber[5])
+						self.bsc_conn.send_welcome_sms(self.provider, subscriber[5])
 			self.bsc_conn.close()
 
 def main():
