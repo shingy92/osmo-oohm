@@ -20,10 +20,17 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-import os
+import os, sys
 import multiprocessing
 
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+
+class custom_install(install):
+    def run(self):
+        from subprocess import call
+        install.run(self)
+        call(['/usr/sbin/update-rc.d', 'osmocom-oohmi', 'defaults'])
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
@@ -38,22 +45,28 @@ requires = [
     'nose',
     'coverage'
     ]
+    
+data_files=[('/etc/openbsc', ['production.ini']),
+            ('/etc/init.d', ['osmocom-oohmi'])]
 
 setup(name='osmo_oohmi',
       version='0.0',
       description='osmo_oohmi',
       long_description=README + '\n\n' + CHANGES,
+      license='AGPLv3',
       classifiers=[
         "Programming Language :: Python",
         "Framework :: Pyramid",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        "License :: OSI Approved :: GNU Affero General Public License v3",
         ],
       author='Alton MacDonald',
       author_email='alton.kenneth.macdonald@fokus.fraunhofer.de',
-      url='',
-      keywords='web pyramid pylons',
+      url='http://git.osmocom.org/python/osmo-oohmi/',
+      keywords='openbsc web pyramid pylons',
       packages=find_packages(),
+      data_files=data_files,
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
@@ -63,4 +76,5 @@ setup(name='osmo_oohmi',
       [paste.app_factory]
       main = hlr_mgmt:main
       """,
+      cmdclass={'install': custom_install}
       )

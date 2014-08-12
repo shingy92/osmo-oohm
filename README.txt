@@ -46,10 +46,9 @@ Installation & Configuration:
 	you can add your Provider Details at the end of hlr_mgmt/mcc_mnc.csv following the format:
 		MCC,MNC,Network,Operator,Status
 
-2) Install the python dependencies
+2) Install osmo-oohmi. This installation process resolves all the required dependencies and sets up its init scripts.
 
 	sudo python setup.py install
-	cp production.ini /etc/openbsc/production.ini
 
 3) Verify installation:
 
@@ -57,21 +56,17 @@ Installation & Configuration:
 
 	If the above command generates errors, try to fix these before running the software
 
-4) Run the Server:
+4) Run the Server for the first time:
+	/etc/init.d/osmocom-oohmi start
+	
+	OPTIONAL DEVELOPER INFO:
+		the server can also be invoked manually as shown below
+	
+		cd /etc/openbsc/
+		# pserve is a nice python daemonizing function, customize the execution of the hlr_mgmt module by changing runtime flags.
+		pserve --help
+		pserve production.ini start
 
-	cd /etc/openbsc/
-	pserve production.ini start
-
-	OPTIONAL:
-	pserve is a nice python daemonizing function, customize the execution of the hlr_mgmt module by changing runtime flags.
-
-		pserver --help
-
-5) Install init script
-
-	sudo cp osmocom-oohmi /etc/init.d/osmocom-oohmi
-	sudo update-rc.d osmocom-oohmi defaults
-
-6) Access the Web Interface
+5) Access the Web Interface
 
 	http://localhost:8080/
